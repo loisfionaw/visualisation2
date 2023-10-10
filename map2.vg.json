@@ -1,0 +1,75 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "data": {
+    "url": "covid_au.csv"
+    },
+  "vconcat" : [
+    {
+      "width": "container",
+      "height": 600,
+      "title": "Fig 2. Rolled Out Vaccines per Capita",
+      "projection": {"type": "mercator"},
+      "layer": [
+        {
+          "data": {
+            "url": "https://raw.githubusercontent.com/alwaysblazing/Australia-State-TopoJson-MapChart/master/au-states-topo.json",
+            "format": {
+              "type": "topojson", 
+              "feature": "austates"}
+            },
+            "transform": [
+              {
+              "lookup": "id",
+              "from": {
+              "data": {
+              "url": "conf_coor.csv"
+              },
+              "key": "no_id",
+              "fields": ["state","case_pervaccines"]
+              }
+            }
+            ],
+            "mark" : {
+              "type": "geoshape",
+              "stroke" : "white"
+            },
+            
+            "encoding": {
+            "color": {
+            "field": "case_pervaccines",
+            "type": "quantitative",
+            "scale": {"type": "ordinal"},
+            "legend" : {
+              "type" : "gradient",
+              "tickCount" : 8,
+              "title" : "Rolled Out Vaccines per Capita"
+            }
+            },
+            "tooltip": [
+            {"field": "state", "type": "nominal", "title":
+            "states"},
+            {"field": "case_pervaccines", "type": "quantitative"}
+            ]
+          }
+        },
+        {
+          "data": {
+            "url": "grat.json",
+            "format": {
+            "type": "topojson", 
+            "feature": "ne_10m_graticules_30"}}, 
+          "mark": {"type": "geoshape", "stroke": "black", "strokeDash": [2, 2]}
+        }
+      ]
+    }
+  
+  ]
+,
+"config" : {"title": {
+"font" : "sans-serif",
+"fontSize" : 35
+}}
+}
+
+
+

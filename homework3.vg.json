@@ -1,0 +1,73 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "data": [{
+    "url": "covid_au.csv"
+    }],
+  "vconcat" : [
+    {
+      "width": "container",
+      "height": 600,
+      "title": "Fig 1. Confirmed COVID-19 Cases per Capita",
+      "projection": {"type": "mercator"},
+      "layer": [
+        {
+          "data": {
+            "url": "output.json",
+            "format": {
+              "type": "topojson", 
+              "feature": "austates"}
+            },
+            "transform": [
+              {
+              "lookup": "id",
+              "from": {
+              "data": {
+              "url": "conf_coor.csv"
+              },
+              "key": "no_id",
+              "fields": ["state","case_per1000"]
+              }
+            }
+            ],
+            "mark" : {
+              "type": "geoshape",
+              "stroke" : "white"
+            },
+            
+            "encoding": {
+            "color": {
+            "field": "case_per1000",
+            "type": "quantitative",
+            "scale": {"type": "ordinal"},
+            "title" : "Confirmed Cases per Capita"
+
+            },
+            "tooltip": [
+            {"field": "state", "type": "nominal", "title":
+            "states"},
+            {"field": "case_per1000", "type": "quantitative"}
+            ]
+          }
+        }, 
+        {
+          "data": {
+            "url": "grat.json",
+            "format": {
+            "type": "topojson", 
+            "feature": "ne_10m_graticules_30"}}, 
+          "mark": {"type": "geoshape", "stroke": "black", "strokeDash": [2, 2]}
+        }
+      ]
+    }
+      ]
+    
+  
+,
+"config" : {"title": {
+"font" : "sans-serif",
+"fontSize" : 35
+}}
+}
+
+
+

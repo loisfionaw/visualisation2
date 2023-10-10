@@ -1,0 +1,232 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "data": {
+    "url": "covid_au.csv"
+    },
+  "vconcat" : [
+    {
+      "width": "container",
+      "height": 50,
+      "data": {
+        "values": [{"text": "Note: Fig 3. shows the daily confirmed COCID-19 cases at each states"}]
+      },
+      "mark": {"type": "text", "align": "right", "baseline": "middle"},
+      "encoding": {"text": {"field": "text", "type": "nominal"}}
+    },
+    {
+      "width": "container",
+      "height": 600,
+      "data" : {
+        "url" : "covid_au.csv"
+      },
+      "transform": [
+        {
+          "filter": {"selection": "stateFilter"}
+        }
+      ],
+     
+      "mark" : "line",
+      "title": "Fig 3. Confirmed COVID-19 Cases",
+      "encoding" : {
+        "x" : {
+          "field" : "date",
+          "type" : "temporal",
+          "axis" : {"title" : "", "format" : "%Y-%b", "labelFontSize" : 15, "titleFontSize": 25}
+        },
+        "y" : {
+          "field" : "confirmed",
+          "type" : "quantitative",
+          "title" : "Confirmed Cases",
+          "scale" : {"zero" : true},
+          "axis" : {"labelFontSize" : 15, "titleFontSize": 25}
+
+        },
+        "color" : {
+          "field" : "state",
+          "type" : "nominal",
+          "title" : "State",
+          "scale": {
+            "range": [
+              "#1f77b4", 
+              "#ff7f0e", 
+              "#9467bd",
+              "#8c564b", 
+              "#e377c2", 
+              "#7f7f7f", 
+              "#bcbd22", 
+              "#17becf"  
+            ]}
+        },
+        
+        "tooltip": [
+          {"field": "date", "type": "temporal", "title": "Date"},
+          {"field": "confirmed", "type": "quantitative", "title": "Confirmed Cases"},
+          {"field": "state", "type": "nominal", "title": "State"}
+        ]
+        },
+        "config": {
+        "mark": {"tooltip": {"fontSize": 25}},
+        "text": {"fontSize": 14, "font": "sans-serif"}
+        },
+        "selection": {
+          "stateFilter": {
+            "type": "multi",
+            "fields": ["state"],
+            "bind": "legend"  
+          },
+          "brush" : {
+            "type" : "interval"
+          }
+        }
+      },
+   
+      {
+        "width": "container",
+        "height": 50,
+        "data": {
+          "values": [{"text": "Note: Fig 4. is a zoomed in view of the confirmed cases on each states"}]
+        },
+        "mark": {"type": "text", "align": "right", "baseline": "middle"},
+        "encoding": {"text": {"field": "text", "type": "nominal"}}
+      },
+    
+        
+        {
+          "width": "container",
+          "height": 600,
+          "data": {
+            "url": "covid_au.csv"
+          },
+          "transform": [
+            {"filter": {"selection": "brush"}},
+            {"filter": {"selection": "stateFilter"}}
+          ],
+          "mark": "line",
+          "title": "Fig 4. Focus time line (Confirmed Cases)",
+          "encoding": {
+            "x": {
+              "field": "date",
+              "type": "temporal",
+              "axis": {"title": "", "format": "%Y-%b",  "labelFontSize" : 15, "titleFontSize": 25}
+            },
+            "y": {
+              "field": "confirmed",
+              "type": "quantitative",
+              "title": "Confirmed Cases",
+              "scale": {"zero": true},
+              "axis" : {"labelFontSize" : 15, "titleFontSize": 25}
+
+            },
+            "color": {
+              "field": "state",
+              "type": "nominal",
+              "title": "State",
+              "scale": {
+                "range": [
+                  "#1f77b4", 
+                  "#ff7f0e", 
+                  "#9467bd",
+                  "#8c564b", 
+                  "#e377c2", 
+                  "#7f7f7f", 
+                  "#bcbd22", 
+                  "#17becf"  
+                ]
+            }
+            },
+            "tooltip": [
+              {"field": "date", "type": "temporal", "title": "Date"},
+              {"field": "confirmed", "type": "quantitative", "title": "Confirmed cases"},
+              {"field": "state", "type": "nominal", "title": "State"}
+            ]
+        }
+      },
+      {
+        "width": "container",
+        "height": 50,
+        "data": {
+          "values": [{"text": "Note: Fig 5. is a zoomed in view of the cumulated rolled out vacciens"}]
+        },
+        "mark": {"type": "text", "align": "right", "baseline": "middle"},
+        "encoding": {"text": {"field": "text", "type": "nominal"}}
+      }
+      ,
+      {
+        "width": "container",
+        "height": 600,
+        "data": {
+          "url": "covid_au.csv"
+        },
+        "transform": [
+          {"filter": {"selection": "brush"}},
+          {"filter": {"selection": "stateFilter"}}
+        ],
+        "mark": "area",
+        "title": "Fig 5. Rolled out vaccines to date",
+        "encoding": {
+          "x": {
+            "field": "date",
+            "type": "temporal",
+            "axis": {"title": "", "format": "%Y-%b",  "labelFontSize" : 15, "titleFontSize": 25}
+          },
+          "y": {
+            "field": "vaccines_cum",
+            "type": "quantitative",
+            "title": "Vaccines Roll out Cummulated",
+            "scale": {"zero": true},
+            "axis" : {"labelFontSize" : 15, "titleFontSize": 25}
+
+          },
+          "color": {
+            "field": "state",
+            "type": "nominal",
+            "title": "State",
+            "scale": {
+              "range": [
+                "#1f77b4", 
+                "#ff7f0e", 
+                "#9467bd",
+                "#8c564b", 
+                "#e377c2", 
+                "#7f7f7f", 
+                "#bcbd22", 
+                "#17becf"  
+              ]
+          }
+          },
+          "tooltip": [
+            {"field": "date", "type": "temporal", "title": "Date"},
+            {"field": "vaccines_cum", "type": "quantitative", "title": "Rolled out Vaccines to date"},
+            {"field": "state", "type": "nominal", "title": "State"}
+          ]            },
+          "config": {
+        "mark": {"tooltip": {"fontSize": 25}},
+        "text": {"fontSize": 14, "font": "sans-serif"}
+        }
+        
+        
+     
+    }
+  
+    
+  
+    ]
+    
+  
+
+  
+  
+,
+"config" : {"title": {
+"font" : "sans-serif",
+"fontSize" : 35
+}, "text": {
+"font" : "sans-serif",
+"fontSize" : 25
+},
+"legend" :{
+  "labelFont" : "sans-serif",
+  "labelFontSize" : 35
+},
+"tooltipFormat": {"font" : "sans-esrif"}}
+}

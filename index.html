@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<script src="https://cdn.jsdelivr.net/npm/vega@5.20.2"></script>
+<script src="https://cdn.jsdelivr.net/npm/vega-lite@5.1.0"></script>
+<script src="https://cdn.jsdelivr.net/npm/vega-embed@6.17.0"></script>
+<script src="h3_vis.js"></script>
+<style>
+    
+    div {
+         color: black;
+         margin: 0 auto;
+         font-size: 25px;
+         left: 20%;
+         width: 60%;
+         border: 2px black;
+      }
+    h1 {
+        text-align: center;
+        font-size: 75px;
+
+    }
+    p {
+         color: black;
+         margin: 0 auto;
+         font-size: 35px;
+         text-align: left;
+      }
+    
+      
+</style>
+</head>
+<body>
+<h1 class= h1, style = "margin: 0 auto; left: 50%;">Australia Covid Cases </h1><br><br><br>
+
+
+<div style="width: 60%; margin: auto;", class = div>
+    <p> 
+        The following Map visualises the total of covid cases per kapita in each states of Australia. 
+    </p>
+</div><br><br>
+
+<div id="cases_map", style="width: 60%; margin: auto;", class = "div"> 
+
+</div><br><br>
+
+<div style="width: 60%; margin: auto;", class = div>
+    <p> 
+        The following Map visualises total vaccination rolled out per kapita in each states . <br>
+    </p>
+</div><br><br>
+
+
+<div id="map2", style="width: 60%;"><br>
+</div><br><br>
+
+<div style="width: 60%; margin: auto;", class = div>
+    <p> 
+        The first line graph below shows the confirmed cases per day in each states.<br>
+        You can filter which state you would like to observe by clicking on the state in the legend. <br>
+        The area graph shows the number of vaccines rolled out to date in each states. <br>
+        You can zoom in on a specific time range by selecting on the first line graph<br>
+        The area graph and the second line graph will be updated according to the selected zoomed in time line. <br>    </p>
+</div> <br><br>
+
+
+<div id= "cases_graph", style="width: 60%;"> </div>
+</body>
+</html>
